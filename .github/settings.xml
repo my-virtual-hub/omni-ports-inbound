@@ -10,8 +10,8 @@
         </server>
         <server>
             <id>alternative-repo-release</id>
-            <username>${env.MAVEN_USERNAME_ALTERNATIVE_RELEASE</username>
-            <password>${env.MAVEN_PASSWORD_ALTERNATIVE_RELEASE</password>
+            <username>${env.MAVEN_USERNAME_ALTERNATIVE_RELEASE}</username>
+            <password>${env.MAVEN_PASSWORD_ALTERNATIVE_RELEASE}</password>
         </server>
         <server>
             <id>alternative-repo-snapshot</id>
