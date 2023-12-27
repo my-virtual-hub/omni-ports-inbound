@@ -35,12 +35,35 @@
         </plugins>
     </build>
 
-    <distributionManagement>
-        <repository>
+    <profiles>
+        <profile>
             <id>github</id>
-            <name>GitHub OWNER Apache Maven Packages</name>
-            <url>https://maven.pkg.github.com/marco-quicula/omni-communicator-ports-inbound</url>
-        </repository>
-    </distributionManagement>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <distributionManagement>
+                <repository>
+                    <id>github</id>
+                    <name>GitHub OWNER Apache Maven Packages</name>
+                    <url>https://maven.pkg.github.com/marco-quicula/omni-communicator-ports-inbound</url>
+                </repository>
+            </distributionManagement>
+        </profile>
+        <profile>
+            <id>alternative</id>
+            <distributionManagement>
+                <repository>
+                    <id>alternative-repo-release</id>
+                    <name>My Virtual Hub Maven Release Packages</name>
+                    <url>https://repository.myvirtualhub.com.br/repository/mvhub-repo-release/</url>
+                </repository>
+                <snapshotRepository>
+                    <id>alternative-repo-snapshot</id>
+                    <name>My Virtual Hub Maven Snapshot Packages</name>
+                    <url>https://repository.myvirtualhub.com.br/repository/mvhub-repo-snapshot/</url>
+                </snapshotRepository>
+            </distributionManagement>
+        </profile>
+    </profiles>
 
 </project>
