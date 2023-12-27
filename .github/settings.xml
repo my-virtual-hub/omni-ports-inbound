@@ -15,8 +15,8 @@
         </server>
         <server>
             <id>alternative-repo-snapshot</id>
-            <username>${env.MAVEN_USERNAME_ALTERNATIVE_SNAPSHOT}</username>
-            <password>${env.MAVEN_PASSWORD_ALTERNATIVE_SNAPSHOT}</password>
+            <username>mvhub-publisher-snapshot</username>
+            <password>QbfMTrXCfQEsfuYCWy4N</password>
         </server>
     </servers>
 </settings>
