@@ -55,6 +55,6 @@ jobs:
           git config --local user.email "github.action@quicula.com.br"
           git config --local user.name "GitHub Action Automation"
           git tag -a $BUILD_NAME -m "Build $$BUILD_NAME, by GitHub Action Automation."
-          git push https://${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.actor }}/${{ github.repository }} --tags
+          git push https://${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }} --tags
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
