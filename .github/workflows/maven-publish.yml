@@ -4,13 +4,8 @@
 name: Maven Package
 
 on:
-  push:
-    tags:
-      - publish-*
-  workflow_run:
-    workflows: [ "SonarCloud and Qodana" ]
-    types:
-      - completed
+  repository_dispatch:
+    types: [start-build]
 
 jobs:
   build:
