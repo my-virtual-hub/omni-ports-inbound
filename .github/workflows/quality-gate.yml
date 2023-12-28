@@ -52,7 +52,7 @@ jobs:
         run: |
           TIMESTAMP=$(date '+%Y-%m-%d-%H-%M-%S')
           RUN_NUMBER=${{ github.run_number }}
-          BUILD_NAME="${TIMESTAMP}-${RUN_NUMBER}"
+          BUILD_NAME=publish-${TIMESTAMP}-${RUN_NUMBER}
           git config --global user.email "github.action@quicula.com.br"
           git config --global user.name "GitHub Action Automation"
           git tag -a $BUILD_NAME -m "Build $$BUILD_NAME, by GitHub Action Automation."
