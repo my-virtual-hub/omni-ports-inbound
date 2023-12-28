@@ -4,9 +4,10 @@
 name: Maven Package
 
 on:
-  repository_dispatch:
-    types:
-     - start-maven-publish
+  push:
+    branches:
+      - main
+      - develop
 
 jobs:
   build:
