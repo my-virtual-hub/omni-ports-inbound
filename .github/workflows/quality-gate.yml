@@ -50,24 +50,33 @@ jobs:
       - name: Create Tag to Publish
         if: github.event_name == 'push'
         run: |
-          rm publish*.txt || true
-          TIMESTAMP=$(date '+%Y-%m-%d-%H-%M-%S')
-          RUN_NUMBER=${{ github.run_number }}
-          BUILD_NAME=publish-${TIMESTAMP}-${RUN_NUMBER}
-          echo "This is build $BUILD_NAME" > $BUILD_NAME.txt
-          git config --global user.email "github.action@quicula.com.br"
-          git config --global user.name "GitHub Action Automation"
-          git add "$BUILD_NAME.txt"
-          git commit -m "Build $$BUILD_NAME, by GitHub Action Automation."
-          git tag -a $BUILD_NAME -m "Tag Build $$BUILD_NAME created by GitHub Action Automation."
-
-      - name: Publish Tag
-        uses: GuillaumeFalourd/git-commit-push@v1.3
-        if: github.event_name == 'push'
-        with:
-          email: github.action@quicula.com.br
-          name: GitHub Action Automation
-          commit_message: Automatic tag Build by GitHub Action Automation
-          force: true
-          empty: true
-          tags: true
+          CURRENT_BRANCH=${{ github.ref }}
+          case $CURRENT_BRANCH in "refs/heads/"*)
+            CURRENT_BRANCH=$(echo "$CURRENT_BRANCH" | sed "s@refs/heads/@@")
+          esac
+          
+          TARGET_BRANCH=refs/heads/develop
+          case $TARGET_BRANCH in "refs/heads/"*)
+            TARGET_BRANCH=$(echo "$TARGET_BRANCH" | sed "s@refs/heads/@@")
+          esac
+          
+          FORCE='--force'
+          EMPTY='--allow-empty'
+          TAGS='--tags'
+          
+          echo "machine github.com" > "$HOME/.netrc"
+          echo "  login ${{ github.actor }}" >> "$HOME/.netrc"
+          echo "  password ${{ github.token }}" >> "$HOME/.netrc"
+          
+          git config --local user.email "github.action@quicula.com.br"
+          git config --local user.name "GitHub Action Automation"
+          
+          git add . -v
+          git commit -m "Automatic tag Build by GitHub Action Automation" $EMPTY
+          git branch git-commit-push-action-${{ github.run_id }}-${{ github.job }}
+          git fetch "origin" "$CURRENT_BRANCH"
+          git checkout "$CURRENT_BRANCH"
+          git merge git-commit-push-action-${{ github.run_id }}-${{ github.job }}
+          git branch -d git-commit-push-action-${{ github.run_id }}-${{ github.job }}
+          
+          git push "origin" "$CURRENT_BRANCH:$TARGET_BRANCH" --follow-tags $FORCE $TAGS
