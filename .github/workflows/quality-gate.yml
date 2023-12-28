@@ -46,15 +46,19 @@ jobs:
         uses: JetBrains/qodana-action@v2023.3
         env:
           QODANA_TOKEN: ${{ secrets.QODANA_TOKEN }}
-      - name: Create Tag to Publish
+
+      - name: Create Tag and Publish
+      - uses: GuillaumeFalourd/git-commit-push@v1.3
         if: success() && github.event_name == 'push'
         run: |
           TIMESTAMP=$(date '+%Y-%m-%d-%H-%M-%S')
           RUN_NUMBER=${{ github.run_number }}
           BUILD_NAME="${TIMESTAMP}-${RUN_NUMBER}"
-          git config --local user.email "github.action@quicula.com.br"
-          git config --local user.name "GitHub Action Automation"
           git tag -a $BUILD_NAME -m "Build $$BUILD_NAME, by GitHub Action Automation."
-          git push https://${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }} --tags
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          email: github.action@quicula.com.br
+          name: "GitHub Action Automation"
+          commit_message: "Automatic tag Build $$BUILD_NAME, by GitHub Action Automation."
+          force: true
+          empty: true
+          tags: true
