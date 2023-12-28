@@ -5,7 +5,8 @@ name: Maven Package
 
 on:
   repository_dispatch:
-    types: [start-build]
+    types:
+     - start-maven-publish
 
 jobs:
   build:
