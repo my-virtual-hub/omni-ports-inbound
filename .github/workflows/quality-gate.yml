@@ -49,7 +49,11 @@ jobs:
 
       - name: Trigger Another Workflow
         run: |
-          curl -XPOST -u "marco-quicula:${{ github.token }}" \
+          curl -XPOST -u "$GITHUB_USER:$GITHUB_TOKEN" \
           -H "Accept: application/vnd.github.v3+json" \
-          https://api.github.com/repos/${{ GITHUB_REPOSITORY }}/dispatches \
+          https://api.github.com/repos/$GITHUB_REPOSITORY/dispatches \
           -d '{"event_type": "start-build"}'
+        env:
+          GITHUB_USER: ${{ github.actor }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
