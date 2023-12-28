@@ -47,9 +47,8 @@ jobs:
         env:
           QODANA_TOKEN: ${{ secrets.QODANA_TOKEN }}
 
-      - name: Create Tag and Publish
-      - uses: GuillaumeFalourd/git-commit-push@v1.3
-        if: success() && github.event_name == 'push'
+      - name: Create Tag to Publish
+        if: github.event_name == 'push'
         run: |
           TIMESTAMP=$(date '+%Y-%m-%d-%H-%M-%S')
           RUN_NUMBER=${{ github.run_number }}
@@ -58,7 +57,18 @@ jobs:
         with:
           email: github.action@quicula.com.br
           name: "GitHub Action Automation"
-          commit_message: "Automatic tag Build $$BUILD_NAME, by GitHub Action Automation."
+          commit_message: "Automatic tag Build $$BUILD_NAME, by GitHub Action Automation"
+          force: true
+          empty: true
+          tags: true
+
+      - name: Publish Tag
+        uses: GuillaumeFalourd/git-commit-push@v1.3
+        if: github.event_name == 'push'
+        with:
+          email: github.action@quicula.com.br
+          name: "GitHub Action Automation"
+          commit_message: "Automatic tag Build by GitHub Action Automation"
           force: true
           empty: true
           tags: true
