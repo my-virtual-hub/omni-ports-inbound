@@ -53,6 +53,8 @@ jobs:
           TIMESTAMP=$(date '+%Y-%m-%d-%H-%M-%S')
           RUN_NUMBER=${{ github.run_number }}
           BUILD_NAME="${TIMESTAMP}-${RUN_NUMBER}"
+          git config --global user.email "github.action@quicula.com.br"
+          git config --global user.name "GitHub Action Automation"
           git tag -a $BUILD_NAME -m "Build $$BUILD_NAME, by GitHub Action Automation."
 
       - name: Publish Tag
@@ -60,8 +62,8 @@ jobs:
         if: github.event_name == 'push'
         with:
           email: github.action@quicula.com.br
-          name: "GitHub Action Automation"
-          commit_message: "Automatic tag Build by GitHub Action Automation"
+          name: GitHub Action Automation
+          commit_message: Automatic tag Build by GitHub Action Automation
           force: true
           empty: true
           tags: true
