@@ -54,13 +54,6 @@ jobs:
           RUN_NUMBER=${{ github.run_number }}
           BUILD_NAME="${TIMESTAMP}-${RUN_NUMBER}"
           git tag -a $BUILD_NAME -m "Build $$BUILD_NAME, by GitHub Action Automation."
-        with:
-          email: github.action@quicula.com.br
-          name: "GitHub Action Automation"
-          commit_message: "Automatic tag Build $$BUILD_NAME, by GitHub Action Automation"
-          force: true
-          empty: true
-          tags: true
 
       - name: Publish Tag
         uses: GuillaumeFalourd/git-commit-push@v1.3
