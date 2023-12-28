@@ -68,6 +68,10 @@ jobs:
           echo "  login ${{ github.actor }}" >> "$HOME/.netrc"
           echo "  password ${{ github.token }}" >> "$HOME/.netrc"
           
+          echo "machine github.com" > "$HOME/.netrc"
+          echo "  login ${{ github.actor }}" >> "$HOME/.netrc"
+          echo "  password ${{ github.token }}" >> "$HOME/.netrc"
+          
           git config --local user.email "github.action@quicula.com.br"
           git config --local user.name "GitHub Action Automation"
           
