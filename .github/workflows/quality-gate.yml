@@ -50,12 +50,16 @@ jobs:
       - name: Create Tag to Publish
         if: github.event_name == 'push'
         run: |
+          rm publish*.txt || true
           TIMESTAMP=$(date '+%Y-%m-%d-%H-%M-%S')
           RUN_NUMBER=${{ github.run_number }}
           BUILD_NAME=publish-${TIMESTAMP}-${RUN_NUMBER}
+          echo "This is build $BUILD_NAME" > $BUILD_NAME.txt
           git config --global user.email "github.action@quicula.com.br"
           git config --global user.name "GitHub Action Automation"
-          git tag -a $BUILD_NAME -m "Build $$BUILD_NAME, by GitHub Action Automation."
+          git add "$BUILD_NAME.txt"
+          git commit -m "Build $$BUILD_NAME, by GitHub Action Automation."
+          git tag -a $BUILD_NAME -m "Tag Build $$BUILD_NAME created by GitHub Action Automation."
 
       - name: Publish Tag
         uses: GuillaumeFalourd/git-commit-push@v1.3
