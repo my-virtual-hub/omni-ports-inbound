@@ -49,9 +49,12 @@ jobs:
       - name: Create Tag to Publish
         if: success() && github.event_name == 'push'
         run: |
+          TIMESTAMP=$(date '+%Y-%m-%d-%H-%M-%S')
+          RUN_NUMBER=${{ github.run_number }}
+          BUILD_NAME="${TIMESTAMP}-${RUN_NUMBER}"
           git config --local user.email "github.action@quicula.com.br"
           git config --local user.name "GitHub Action Automation"
-          git tag -a build-${{ github.run_number }} 
-          git push origin build-${{ github.run_number }}
+          git tag -a $BUILD_NAME -m "Build $$BUILD_NAME, by GitHub Action Automation" 
+          git push origin $BUILD_NAME
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
