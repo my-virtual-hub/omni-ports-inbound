@@ -10,7 +10,7 @@
 
     <properties>
         <maven.compiler.release>17</maven.compiler.release>
-        <sonar.organization>marco-quicula</sonar.organization>
+        <sonar.organization>my-virtual-hub</sonar.organization>
         <maven-javadoc-plugin>3.6.3</maven-javadoc-plugin>
         <maven-compiler-plugin>3.11.0</maven-compiler-plugin>
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
