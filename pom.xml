@@ -4,8 +4,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>br.com.quicula.omnicommunicator</groupId>
-    <artifactId>omnicommunicator-ports-inbound</artifactId>
+    <groupId>br.com.myvirtualhub.omni.comm</groupId>
+    <artifactId>omni-comm-ports-inbound</artifactId>
     <version>0.1.0-SNAPSHOT</version>
 
     <properties>
@@ -45,7 +45,7 @@
                 <repository>
                     <id>github</id>
                     <name>GitHub OWNER Apache Maven Packages</name>
-                    <url>https://maven.pkg.github.com/marco-quicula/omni-communicator-ports-inbound</url>
+                    <url>https://maven.pkg.github.com/my-virtual-hub/omni-comm-ports-inbound</url>
                 </repository>
             </distributionManagement>
         </profile>
