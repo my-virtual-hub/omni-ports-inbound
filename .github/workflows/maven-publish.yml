@@ -42,12 +42,6 @@ jobs:
         MAVEN_USERNAME_ALTERNATIVE_SNAPSHOT: ${{ secrets.MAVEN_USERNAME_ALTERNATIVE_SNAPSHOT }}
         MAVEN_PASSWORD_ALTERNATIVE_SNAPSHOT: ${{ secrets.MAVEN_PASSWORD_ALTERNATIVE_SNAPSHOT }}
 
-    - name: Configure GPG
-      run: |
-        echo "allow-loopback-pinentry" >> ~/.gnupg/gpg-agent.conf
-        echo "pinentry-mode loopback" >> ~/.gnupg/gpg.conf
-        gpgconf --reload gpg-agent
-
     - name: Import GPG Key
       run: |
         echo "${{ secrets.GPG_PRIVATE_KEY }}" | gpg --batch --import --no-tty --pinentry-mode loopback
