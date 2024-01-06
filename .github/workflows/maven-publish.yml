@@ -47,14 +47,19 @@ jobs:
         MAVEN_PASSWORD_ALTERNATIVE_SNAPSHOT: ${{ secrets.MAVEN_PASSWORD_ALTERNATIVE_SNAPSHOT }}
 
     - name: Install Pinentry
-      run: sudo apt-get install pinentry-curses
+      run: sudo apt-get install pinentry-tty
+
+    - name: Enable GPG Loopback
+      run: echo "use-agent" >> ~/.gnupg/gpg.conf && echo "pinentry-mode loopback" >> ~/.gnupg/gpg.conf
 
     - name: Prepare GPG Agent
       run: |
-        echo "GPG_TTY=$(tty)" >> $GITHUB_ENV
         echo "allow-loopback-pinentry" >> ~/.gnupg/gpg-agent.conf
-        echo "pinentry-program /usr/bin/pinentry-curses" >> ~/.gnupg/gpg-agent.conf
+        echo "pinentry-program /usr/bin/pinentry-tty" >> ~/.gnupg/gpg-agent.conf
         gpgconf --reload gpg-agent
+
+    - name: List Pinentry
+      run: apt list --installed | grep pinentry
 
     - name: Publish to GitHub Packages Apache Maven
       run: mvn -B deploy --settings .github/settings.xml -Pgithub -DskipTests
