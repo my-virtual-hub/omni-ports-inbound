@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>br.com.myvirtualhub.omni.comm</groupId>
+    <groupId>br.com.myvirtualhub</groupId>
     <artifactId>omni-comm-ports-inbound</artifactId>
     <version>0.1.0-SNAPSHOT</version>
 
@@ -55,12 +55,12 @@
                 <repository>
                     <id>alternative-repo-release</id>
                     <name>My Virtual Hub Maven Release Packages</name>
-                    <url>https://repository.myvirtualhub.com.br/repository/mvhub-repo-release/</url>
+                    <url>https://repository.myvirtualhub.com.br/repository/myvirtualhub-releases/</url>
                 </repository>
                 <snapshotRepository>
                     <id>alternative-repo-snapshot</id>
                     <name>My Virtual Hub Maven Snapshot Packages</name>
-                    <url>https://repository.myvirtualhub.com.br/repository/mvhub-repo-snapshot/</url>
+                    <url>https://repository.myvirtualhub.com.br/repository/myvirtualhub-snapshots/</url>
                 </snapshotRepository>
             </distributionManagement>
         </profile>
