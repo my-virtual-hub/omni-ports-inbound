@@ -19,4 +19,15 @@
             <password>${env.MAVEN_PASSWORD_ALTERNATIVE_SNAPSHOT}</password>
         </server>
     </servers>
+    <profiles>
+        <profile>
+            <id>ossrh</id>
+            <properties>
+                <gpg.executable>gpg</gpg.executable>
+                <gpg.passphrase>${env.GPG_PASSPHRASE}</gpg.passphrase>
+                <gpg.keyname>${env.GPG_KEYNAME}</gpg.keyname>
+                <gpg.passphraseServerId>${env.GPG_PASSPHRASE_SERVER_ID}</gpg.passphraseServerId>
+            </properties>
+        </profile>
+    </profiles>
 </settings>

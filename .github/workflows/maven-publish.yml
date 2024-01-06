@@ -42,8 +42,16 @@ jobs:
         MAVEN_USERNAME_ALTERNATIVE_SNAPSHOT: ${{ secrets.MAVEN_USERNAME_ALTERNATIVE_SNAPSHOT }}
         MAVEN_PASSWORD_ALTERNATIVE_SNAPSHOT: ${{ secrets.MAVEN_PASSWORD_ALTERNATIVE_SNAPSHOT }}
 
+    - name: Import GPG Key
+      run: |
+        echo "${{ secrets.GPG_PRIVATE_KEY }}" | gpg --import
+        echo "${{ secrets.GPG_PASSPHRASE }}" | gpg --passphrase-fd 0 --batch --yes --pinentry-mode loopback --import
+      env:
+        GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
+        GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
+
     - name: Publish to GitHub Packages Apache Maven
-      run: mvn deploy --settings .github/settings.xml
+      run: mvn -B deploy --settings .github/settings.xml -Pgithub
       env:
         MAVEN_USERNAME: ${{ secrets.MAVEN_USERNAME }}
         MAVEN_PASSWORD: ${{ secrets.MAVEN_PASSWORD }}
@@ -51,9 +59,14 @@ jobs:
         MAVEN_PASSWORD_ALTERNATIVE_RELEASE: ${{ secrets.MAVEN_PASSWORD_ALTERNATIVE_RELEASE }}
         MAVEN_USERNAME_ALTERNATIVE_SNAPSHOT: ${{ secrets.MAVEN_USERNAME_ALTERNATIVE_SNAPSHOT }}
         MAVEN_PASSWORD_ALTERNATIVE_SNAPSHOT: ${{ secrets.MAVEN_PASSWORD_ALTERNATIVE_SNAPSHOT }}
+        GPG_PASSPHRASE : ${{ secrets.GPG_PASSPHRASE }}
+        GPG_KEYNAME : ${{ secrets.GPG_KEYNAME }}
+        GPG_PASSPHRASE_SERVER_ID : ${{ secrets.GPG_PASSPHRASE_SERVER_ID }}
+
+
 
     - name: Publish to MVH Repository
-      run: mvn deploy --settings .github/settings.xml -Palternative
+      run: mvn -B deploy --settings .github/settings.xml -Palternative
       env:
         MAVEN_USERNAME: ${{ secrets.MAVEN_USERNAME }}
         MAVEN_PASSWORD: ${{ secrets.MAVEN_PASSWORD }}
@@ -61,3 +74,19 @@ jobs:
         MAVEN_PASSWORD_ALTERNATIVE_RELEASE: ${{ secrets.MAVEN_PASSWORD_ALTERNATIVE_RELEASE }}
         MAVEN_USERNAME_ALTERNATIVE_SNAPSHOT: ${{ secrets.MAVEN_USERNAME_ALTERNATIVE_SNAPSHOT }}
         MAVEN_PASSWORD_ALTERNATIVE_SNAPSHOT: ${{ secrets.MAVEN_PASSWORD_ALTERNATIVE_SNAPSHOT }}
+        GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
+        GPG_KEYNAME: ${{ secrets.GPG_KEYNAME }}
+        GPG_PASSPHRASE_SERVER_ID: ${{ secrets.GPG_PASSPHRASE_SERVER_ID }}
+
+    - name: Publish to MVH Repository
+      run: mvn -B deploy --settings .github/settings.xml -Possrh
+      env:
+        MAVEN_USERNAME: ${{ secrets.MAVEN_USERNAME }}
+        MAVEN_PASSWORD: ${{ secrets.MAVEN_PASSWORD }}
+        MAVEN_USERNAME_ALTERNATIVE_RELEASE: ${{ secrets.MAVEN_USERNAME_ALTERNATIVE_RELEASE }}
+        MAVEN_PASSWORD_ALTERNATIVE_RELEASE: ${{ secrets.MAVEN_PASSWORD_ALTERNATIVE_RELEASE }}
+        MAVEN_USERNAME_ALTERNATIVE_SNAPSHOT: ${{ secrets.MAVEN_USERNAME_ALTERNATIVE_SNAPSHOT }}
+        MAVEN_PASSWORD_ALTERNATIVE_SNAPSHOT: ${{ secrets.MAVEN_PASSWORD_ALTERNATIVE_SNAPSHOT }}
+        GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
+        GPG_KEYNAME: ${{ secrets.GPG_KEYNAME }}
+        GPG_PASSPHRASE_SERVER_ID: ${{ secrets.GPG_PASSPHRASE_SERVER_ID }}
