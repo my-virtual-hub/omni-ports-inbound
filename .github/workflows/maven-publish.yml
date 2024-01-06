@@ -26,6 +26,9 @@ jobs:
         distribution: 'zulu'
         server-id: github # Value of the distributionManagement/repository/id field of the pom.xml
         settings-path: ${{ github.workspace }} # location for the settings.xml file
+        gpg-private-key: ${{ secrets.GPG_PRIVATE_KEY }}
+        gpg-passphrase: ${{ secrets.GPG_PASSPHRASE }}
+
     - name: Cache Maven packages
       uses: actions/cache@v3
       with:
@@ -41,14 +44,6 @@ jobs:
         MAVEN_PASSWORD_ALTERNATIVE_RELEASE: ${{ secrets.MAVEN_PASSWORD_ALTERNATIVE_RELEASE }}
         MAVEN_USERNAME_ALTERNATIVE_SNAPSHOT: ${{ secrets.MAVEN_USERNAME_ALTERNATIVE_SNAPSHOT }}
         MAVEN_PASSWORD_ALTERNATIVE_SNAPSHOT: ${{ secrets.MAVEN_PASSWORD_ALTERNATIVE_SNAPSHOT }}
-
-    - name: Import GPG Key
-      run: |
-        echo "${{ secrets.GPG_PRIVATE_KEY }}" | gpg --batch --import --no-tty --pinentry-mode loopback
-
-    - name: Import Passphrase GPG Key
-      run: |
-        echo "${{ secrets.GPG_PASSPHRASE }}" | gpg --passphrase-fd 0 --batch --yes --pinentry-mode loopback --import
 
     - name: Publish to GitHub Packages Apache Maven
       run: mvn -B deploy --settings .github/settings.xml -Pgithub
