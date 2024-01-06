@@ -45,6 +45,9 @@ jobs:
     - name: Import GPG Key
       run: |
         echo "${{ secrets.GPG_PRIVATE_KEY }}" | gpg --batch --import --no-tty --pinentry-mode loopback
+
+    - name: Import Passphrase GPG Key
+      run: |
         echo "${{ secrets.GPG_PASSPHRASE }}" | gpg --passphrase-fd 0 --batch --yes --pinentry-mode loopback --import
 
     - name: Publish to GitHub Packages Apache Maven
