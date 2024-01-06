@@ -15,7 +15,7 @@
         <maven-javadoc-plugin>3.6.3</maven-javadoc-plugin>
         <maven-source-plugin>2.4</maven-source-plugin>
         <nexus-staging-maven-plugin>1.6.13</nexus-staging-maven-plugin>
-        <maven-gpg-plugin>1.6</maven-gpg-plugin>
+        <maven-gpg-plugin>3.1.0</maven-gpg-plugin>
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
