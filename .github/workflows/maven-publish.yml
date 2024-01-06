@@ -48,6 +48,7 @@ jobs:
 
     - name: Prepare GPG
       run: |
+        echo "GPG_TTY=$(tty)" >> $GITHUB_ENV
         echo "allow-loopback-pinentry" >> ~/.gnupg/gpg-agent.conf
         gpgconf --reload gpg-agent
 
