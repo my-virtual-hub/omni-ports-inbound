@@ -46,10 +46,14 @@ jobs:
         MAVEN_USERNAME_ALTERNATIVE_SNAPSHOT: ${{ secrets.MAVEN_USERNAME_ALTERNATIVE_SNAPSHOT }}
         MAVEN_PASSWORD_ALTERNATIVE_SNAPSHOT: ${{ secrets.MAVEN_PASSWORD_ALTERNATIVE_SNAPSHOT }}
 
-    - name: Prepare GPG
+    - name: Install Pinentry
+      run: sudo apt-get install pinentry-curses
+
+    - name: Prepare GPG Agent
       run: |
         echo "GPG_TTY=$(tty)" >> $GITHUB_ENV
         echo "allow-loopback-pinentry" >> ~/.gnupg/gpg-agent.conf
+        echo "pinentry-program /usr/bin/pinentry-curses" >> ~/.gnupg/gpg-agent.conf
         gpgconf --reload gpg-agent
 
     - name: Publish to GitHub Packages Apache Maven
