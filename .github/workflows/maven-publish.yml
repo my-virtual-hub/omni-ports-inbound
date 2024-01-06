@@ -52,7 +52,7 @@ jobs:
         MAVEN_USERNAME_ALTERNATIVE_SNAPSHOT: ${{ secrets.MAVEN_USERNAME_ALTERNATIVE_SNAPSHOT }}
         MAVEN_PASSWORD_ALTERNATIVE_SNAPSHOT: ${{ secrets.MAVEN_PASSWORD_ALTERNATIVE_SNAPSHOT }}
 
-    - name: Publish to Alternative Repository
+    - name: Publish to MVH Repository
       run: mvn deploy --settings .github/settings.xml -Palternative
       env:
         MAVEN_USERNAME: ${{ secrets.MAVEN_USERNAME }}
