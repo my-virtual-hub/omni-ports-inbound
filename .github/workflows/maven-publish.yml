@@ -47,7 +47,7 @@ jobs:
           chmod 600 ~/.gnupg/passphrase-file
           cat ~/.gnupg/passphrase-file | gpg --batch --import --passphrase-fd 0 ~/.gnupg/private-key.asc
 
-      - name: Publish to GitHub Packages Apache Maven
+      - name: Publish to GitHub Repository
         run: mvn -B deploy --settings .github/settings.xml -Pgithub -DskipTests
         env:
           MAVEN_USERNAME: ${{ secrets.MAVEN_USERNAME }}
