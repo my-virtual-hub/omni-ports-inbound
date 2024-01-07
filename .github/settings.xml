@@ -21,6 +21,24 @@
     </servers>
     <profiles>
         <profile>
+            <id>github</id>
+            <properties>
+                <gpg.executable>gpg</gpg.executable>
+                <gpg.passphrase>${env.GPG_PASSPHRASE}</gpg.passphrase>
+                <gpg.keyname>${env.GPG_KEYNAME}</gpg.keyname>
+                <gpg.passphraseServerId>${env.GPG_PASSPHRASE_SERVER_ID}</gpg.passphraseServerId>
+            </properties>
+        </profile>
+        <profile>
+            <id>alternative</id>
+            <properties>
+                <gpg.executable>gpg</gpg.executable>
+                <gpg.passphrase>${env.GPG_PASSPHRASE}</gpg.passphrase>
+                <gpg.keyname>${env.GPG_KEYNAME}</gpg.keyname>
+                <gpg.passphraseServerId>${env.GPG_PASSPHRASE_SERVER_ID}</gpg.passphraseServerId>
+            </properties>
+        </profile>
+        <profile>
             <id>ossrh</id>
             <properties>
                 <gpg.executable>gpg</gpg.executable>

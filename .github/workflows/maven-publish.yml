@@ -46,7 +46,15 @@ jobs:
         MAVEN_USERNAME_ALTERNATIVE_SNAPSHOT: ${{ secrets.MAVEN_USERNAME_ALTERNATIVE_SNAPSHOT }}
         MAVEN_PASSWORD_ALTERNATIVE_SNAPSHOT: ${{ secrets.MAVEN_PASSWORD_ALTERNATIVE_SNAPSHOT }}
 
-    - name: Publish to GitHub Packages Apache Maven
+    - name: Prepare GPG to Sign
+      run: |
+        mkdir -p ~/.gnupg/
+        echo "${{ secrets.GPG_PASSPHRASE }}" > ~/.gnupg/passphrase-file
+        echo "${{ secrets.GPG_PRIVATE_KEY }}" > ~/.gnupg/private-key.asc
+        chmod 600 ~/.gnupg/passphrase-file
+        cat ~/.gnupg/passphrase-file | gpg --batch --import --passphrase-fd 0 ~/.gnupg/private-key.asc
+
+    - name: Publish to Gmvn -rp itHub Packages Apache Maven
       run: mvn -B -X deploy --settings .github/settings.xml -Pgithub -DskipTests
       env:
         MAVEN_USERNAME: ${{ secrets.MAVEN_USERNAME }}
