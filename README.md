@@ -14,10 +14,10 @@ Leverage these inbound port interfaces and DTOs when developing or extending fun
 
 This project is independent and its development is subject to availability. Contributions from the community, whether in the form of code contributions, bug reports, suggestions, or simply usage, are highly valued and appreciated.
 
-## Using SonarCloud and Snyk for Code Quality
+## Using SonarCloud and Qodana for Code Quality
 
 [![SonarCloud](https://sonarcloud.io/images/project_badges/sonarcloud-white.svg)](https://sonarcloud.io/summary/new_code?id=my-virtual-hub_omni-comm-ports-inbound) 
-[![Quality gate](https://sonarcloud.io/api/project_badges/quality_gate?project=my-virtual-hub_omni-comm-ports-inbound)](https://sonarcloud.io/summary/new_code?id=my-virtual-hub_omni-comm-ports-inbound) [![Known Vulnerabilities](https://snyk.io/test/github/marco-quicula/omni-communicator-domain-layer/badge.svg)](https://snyk.io/test/github/marco-quicula/omni-communicator-domain-layer) 
+[![Quality gate](https://sonarcloud.io/api/project_badges/quality_gate?project=my-virtual-hub_omni-comm-ports-inbound)](https://sonarcloud.io/summary/new_code?id=my-virtual-hub_omni-comm-ports-inbound) 
 
 | Quality Metrics | Code Metrics | Security Metrics |
 |---|---|---|
