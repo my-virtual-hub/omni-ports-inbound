@@ -24,14 +24,6 @@
             <password>${env.MAVEN_PASSWORD_OSSRH}</password>
         </server>
     </servers>
-    <mirrors>
-        <mirror>
-            <id>alternative-repo-mvh</id>
-            <mirrorOf>central</mirrorOf>
-            <name>MVH Nexus Mirror</name>
-            <url>http://repository.myvirtualhub.com.br/repository/maven-central-proxy/</url>
-        </mirror>
-    </mirrors>
     <profiles>
         <profile>
             <id>github</id>
