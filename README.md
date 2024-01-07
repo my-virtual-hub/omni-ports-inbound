@@ -16,8 +16,8 @@ This project is independent and its development is subject to availability. Cont
 
 ## Using SonarCloud and Qodana for Code Quality
 
-[![SonarCloud](https://sonarcloud.io/images/project_badges/sonarcloud-white.svg)](https://sonarcloud.io/summary/new_code?id=my-virtual-hub_omni-comm-ports-inbound) 
-[![Quality gate](https://sonarcloud.io/api/project_badges/quality_gate?project=my-virtual-hub_omni-comm-ports-inbound)](https://sonarcloud.io/summary/new_code?id=my-virtual-hub_omni-comm-ports-inbound) 
+[![SonarCloud](https://sonarcloud.io/images/project_badges/sonarcloud-white.svg)](https://sonarcloud.io/summary/new_code?id=my-virtual-hub_omni-comm-ports-inbound)
+[![Quality gate](https://sonarcloud.io/api/project_badges/quality_gate?project=my-virtual-hub_omni-comm-ports-inbound)](https://sonarcloud.io/summary/new_code?id=my-virtual-hub_omni-comm-ports-inbound)  [![Qodana](https://github.com/my-virtual-hub/omni-comm-ports-inbound/actions/workflows/qodana.yml/badge.svg?branch=main)](https://github.com/my-virtual-hub/omni-comm-ports-inbound/actions/workflows/qodana.yml)
 
 | Quality Metrics | Code Metrics | Security Metrics |
 |---|---|---|
@@ -26,6 +26,7 @@ This project is independent and its development is subject to availability. Cont
 | [![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=my-virtual-hub_omni-comm-ports-inbound&metric=reliability_rating)](https://sonarcloud.io/summary/new_code?id=my-virtual-hub_omni-comm-ports-inbound) | [![Technical Debt](https://sonarcloud.io/api/project_badges/measure?project=my-virtual-hub_omni-comm-ports-inbound&metric=sqale_index)](https://sonarcloud.io/summary/new_code?id=my-virtual-hub_omni-comm-ports-inbound) | [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=my-virtual-hub_omni-comm-ports-inbound&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=my-virtual-hub_omni-comm-ports-inbound) |
 | | [![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=my-virtual-hub_omni-comm-ports-inbound&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=my-virtual-hub_omni-comm-ports-inbound) | |
 | | [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=my-virtual-hub_omni-comm-ports-inbound&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=my-virtual-hub_omni-comm-ports-inbound) | |
+
 
 ## Contact
 
