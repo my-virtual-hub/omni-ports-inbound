@@ -24,4 +24,4 @@ hs_err_pid*
 replay_pid*
 target/
 /.idea/
-/omnicommunicator-ports-inbound.iml
+/omni-ports-inbound.iml
