@@ -30,4 +30,11 @@
         </repository>
     </repositories>
 
+    <dependencies>
+        <dependency>
+            <groupId>br.com.myvirtualhub</groupId>
+            <artifactId>omni-commons</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+    </dependencies>
 </project>
