@@ -18,8 +18,8 @@ class SmsMessageDTOTest {
         String encodingType = "UTF-8";
 
         SmsMessageDTO message = SmsMessageDTO.builder()
-                .content(content)
-                .encodingType(encodingType)
+                .withContent(content)
+                .withEncodingType(encodingType)
                 .build();
 
         assertEquals(content, message.getContent());
@@ -29,18 +29,18 @@ class SmsMessageDTOTest {
     @Test
     void testEquals() {
         SmsMessageDTO message1 = SmsMessageDTO.builder()
-                .content("Message")
-                .encodingType("UTF-8")
+                .withContent("Message")
+                .withEncodingType("UTF-8")
                 .build();
 
         SmsMessageDTO message2 = SmsMessageDTO.builder()
-                .content("Message")
-                .encodingType("UTF-8")
+                .withContent("Message")
+                .withEncodingType("UTF-8")
                 .build();
 
         SmsMessageDTO message3 = SmsMessageDTO.builder()
-                .content("Different")
-                .encodingType("UTF-8")
+                .withContent("Different")
+                .withEncodingType("UTF-8")
                 .build();
 
         assertEquals(message1, message2);
@@ -50,13 +50,13 @@ class SmsMessageDTOTest {
     @Test
     void testHashCode() {
         SmsMessageDTO message1 = SmsMessageDTO.builder()
-                .content("Message")
-                .encodingType("UTF-8")
+                .withContent("Message")
+                .withEncodingType("UTF-8")
                 .build();
 
         SmsMessageDTO message2 = SmsMessageDTO.builder()
-                .content("Message")
-                .encodingType("UTF-8")
+                .withContent("Message")
+                .withEncodingType("UTF-8")
                 .build();
 
         assertEquals(message1.hashCode(), message2.hashCode());
@@ -65,8 +65,8 @@ class SmsMessageDTOTest {
     @Test
     void testToString() {
         SmsMessageDTO message = SmsMessageDTO.builder()
-                .content("Test Message")
-                .encodingType("UTF-8")
+                .withContent("Test Message")
+                .withEncodingType("UTF-8")
                 .build();
 
         String expectedString = "SmsMessageDTO{content='Test Message', encodingType='UTF-8'}";

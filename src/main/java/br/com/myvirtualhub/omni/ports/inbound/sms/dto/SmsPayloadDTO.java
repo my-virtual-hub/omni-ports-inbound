@@ -66,6 +66,15 @@ public class SmsPayloadDTO {
     }
 
     /**
+     * Returns a new instance of the SmsPayloadDTO.Builder class.
+     *
+     * @return A new instance of the SmsPayloadDTO.Builder class.
+     */
+    public static SmsPayloadDTO.Builder builder() {
+        return new SmsPayloadDTO.Builder();
+    }
+
+    /**
      * The Builder class provides methods for creating instances of SmsPayloadDTO.
      */
     public static class Builder {
