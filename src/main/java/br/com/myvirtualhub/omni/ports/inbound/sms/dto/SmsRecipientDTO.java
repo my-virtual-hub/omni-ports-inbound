@@ -64,7 +64,7 @@ public class SmsRecipientDTO {
      *
      * @return A new instance of the SmsRecipientDTO.Builder class.
      */
-    public static Builder newBuilder() {
+    public static Builder builder() {
         return new Builder();
     }
 

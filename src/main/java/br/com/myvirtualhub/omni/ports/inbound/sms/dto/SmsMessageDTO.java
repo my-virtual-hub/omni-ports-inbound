@@ -102,7 +102,7 @@ public class SmsMessageDTO {
          * @param content the content of the SMS message as a string
          * @return the Builder instance
          */
-        public Builder content(String content) {
+        public Builder withContent(String content) {
             this.content = content;
             return this;
         }
@@ -113,7 +113,7 @@ public class SmsMessageDTO {
          * @param encodingType the encoding type of the SMS message as a string
          * @return the Builder instance
          */
-        public Builder encodingType(String encodingType) {
+        public Builder withEncodingType(String encodingType) {
             this.encodingType = encodingType;
             return this;
         }
