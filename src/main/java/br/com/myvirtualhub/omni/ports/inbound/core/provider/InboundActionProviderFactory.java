@@ -25,7 +25,7 @@ public class InboundActionProviderFactory {
 
     private boolean isInitialized = false;
 
-    private final Map<Class<?>, InboudActionFactory<?>> factoryMap = new HashMap<>();
+    private final Map<String, InboudActionFactory<?>> factoryMap = new HashMap<>();
 
     private static final InboundActionProviderFactory INSTANCE = new InboundActionProviderFactory();
 
@@ -40,7 +40,8 @@ public class InboundActionProviderFactory {
     public void initialize(List<? extends InboudActionFactory<?>> factories) {
         factoryMap.clear();
         for (InboudActionFactory<?> factory : factories) {
-            factoryMap.put(factory.getClass(), factory);
+            Class<?>[] interfaces = factory.getClass().getInterfaces();
+            factoryMap.put(interfaces.length>0 ? interfaces[0].getSimpleName() : factory.getClass().getSimpleName(), factory);
         }
         isInitialized = true;
     }
@@ -55,18 +56,17 @@ public class InboundActionProviderFactory {
     }
 
     /**
-     * Retrieves the factory of the specified class from the InboundActionProviderFactory.
-     *
-     * @param factoryClass the class of the factory to retrieve
-     * @param <T>          the type of the factory
-     * @return the factory of the specified class
+     * Retrieves an instance of the desired InboudActionFactory implementation based on the provided factory class.
+     * @param factoryClass the class name of the desired factory
+     * @param <T> the type of the desired factory
+     * @return an instance of the desired factory
      * @throws ProviderFactoryException if the factory is not initialized
      */
-    public <T extends InboudActionFactory<?>> T getFactory(Class<T> factoryClass) throws ProviderFactoryException {
+    public <T extends InboudActionFactory<?>> T getFactory(String factoryClass) throws ProviderFactoryException {
         if (!isInitialized) {
             throw new ProviderFactoryException("Factory not initialized");
         }
-        return factoryClass.cast(factoryMap.get(factoryClass));
+        return (T) factoryMap.get(factoryClass);
     }
 
     /**
