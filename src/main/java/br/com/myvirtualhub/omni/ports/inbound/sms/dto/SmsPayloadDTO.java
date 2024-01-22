@@ -27,14 +27,29 @@ public class SmsPayloadDTO {
         this.clientMessageId = clientMessageId;
     }
 
+    /**
+     * Retrieves the recipient of the SMS message.
+     *
+     * @return The SmsRecipientDTO object representing the recipient of the SMS message.
+     */
     public SmsRecipientDTO getRecipient() {
         return recipient;
     }
 
+    /**
+     * Retrieves the message object representing the SMS message.
+     *
+     * @return The SmsMessageDTO object representing the SMS message.
+     */
     public SmsMessageDTO getMessage() {
         return message;
     }
 
+    /**
+     * Retrieves the clientMessageId of the SmsPayloadDTO.
+     *
+     * @return The clientMessageId of the SmsPayloadDTO.
+     */
     public String getClientMessageId() {
         return clientMessageId;
     }

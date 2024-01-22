@@ -35,7 +35,6 @@ public class InboundActionProviderFactory {
 
     /**
      * Initializes the InboundActionProviderFactory with a list of InboudActionFactory implementations.
-     * <p>
      * @param factories the list of InboudActionFactory implementations to initialize the factory with
      */
     public void initialize(List<? extends InboudActionFactory<?>> factories) {
