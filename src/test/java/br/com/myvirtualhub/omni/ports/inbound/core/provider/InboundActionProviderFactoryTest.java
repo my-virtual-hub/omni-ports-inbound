@@ -29,12 +29,11 @@ class InboundActionProviderFactoryTest {
 
     @Test
     void testInitialize() throws ProviderFactoryException {
-        InboudActionFactory<?> factory = (InboudActionFactory) () -> null;
-        final List<? extends InboudActionFactory<?>> factories = List.of(factory);
-        inboundActionProviderFactoryUnderTest.initialize(factories);
-        InboudActionFactory<?> result = inboundActionProviderFactoryUnderTest.getFactory(factory.getClass());
+        InboudActionFactoryTestImpl inboudActionFactoryTest = new InboudActionFactoryTestImpl();
+        inboundActionProviderFactoryUnderTest.initialize(List.of(inboudActionFactoryTest));
+        InboudActionFactory<?> result = inboundActionProviderFactoryUnderTest.getFactory("InboudActionFactory");
         assertNotNull(result);
-        assertEquals(factory.getClass(), result.getClass());
+        assertEquals(inboudActionFactoryTest.getClass(), result.getClass());
     }
 
     @Test
@@ -47,6 +46,13 @@ class InboundActionProviderFactoryTest {
     void testGetFactory_ThrowsProviderFactoryException() {
         inboundActionProviderFactoryUnderTest.resetProviderFactory();
         assertThrows(ProviderFactoryException.class,
-                () -> inboundActionProviderFactoryUnderTest.getFactory(InboudActionFactory.class));
+                () -> inboundActionProviderFactoryUnderTest.getFactory("InboudActionFactory"));
+    }
+
+    static class InboudActionFactoryTestImpl implements InboudActionFactory<Object> {
+        @Override
+        public Object create() {
+            return null;
+        }
     }
 }
