@@ -52,6 +52,11 @@ public class InboundActionProviderFactory<F extends InboundActionFactory<A>, A e
         return isInitialized;
     }
 
+    /**
+     * Retrieves the size of the factory map.
+     *
+     * @return The size of the factory map.
+     */
     public int getFactoryMapSize() {
         return factoryMap.size();
     }
