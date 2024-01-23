@@ -17,6 +17,7 @@
 package br.com.myvirtualhub.omni.ports.inbound.core.provider;
 
 import br.com.myvirtualhub.omni.ports.inbound.core.exceptions.ProviderFactoryException;
+import br.com.myvirtualhub.omni.ports.inbound.core.interfaces.InboundAction;
 import br.com.myvirtualhub.omni.ports.inbound.core.interfaces.InboundActionFactory;
 
 import java.util.HashMap;
@@ -24,65 +25,90 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * The InboundActionProviderFactory class is responsible for creating and managing instances of InboundActionFactory.
- * It provides a singleton instance and allows for initializing the factory with a list of InboundActionFactory implementations.
- * Instances of the factory can be retrieved by providing the class of the desired factory.
- * <p>
- * Note: This class is thread-safe.
+ * The InboundActionProviderFactory class is responsible for managing a map of InboundActionFactory instances
+ * and providing access to these factories based on their class.
+ *
+ * @param <F> the type of InboundActionFactory
+ * @param <A> the type of InboundAction or its subclass that the factories create
  */
-public class InboundActionProviderFactory {
+public class InboundActionProviderFactory<F extends InboundActionFactory<A>, A extends InboundAction> {
 
     private boolean isInitialized = false;
 
-    private final Map<String, InboundActionFactory<?>> factoryMap = new HashMap<>();
+    private final Map<String, F> factoryMap = new HashMap<>();
 
-    private static final InboundActionProviderFactory INSTANCE = new InboundActionProviderFactory();
+    private static final InboundActionProviderFactory<?,?> INSTANCE = new InboundActionProviderFactory<>();
 
     private InboundActionProviderFactory() {
         // private constructor
     }
 
     /**
-     * Initializes the InboundActionProviderFactory with a list of InboundActionFactory implementations.
-     * @param factories the list of InboundActionFactory implementations to initialize the factory with
+     * Checks if the factory is initialized.
+     *
+     * @return true if the factory is initialized, false otherwise
      */
-    public void initialize(List<? extends InboundActionFactory<?>> factories) {
-        factoryMap.clear();
-        for (InboundActionFactory<?> factory : factories) {
+    public boolean isInitialized() {
+        return isInitialized;
+    }
+
+    public int getFactoryMapSize() {
+        return factoryMap.size();
+    }
+
+    /**
+     * Initializes the factory map with instances of {@link InboundActionFactory} based on a list of factories.
+     * The factories must implement the {@link InboundActionFactory} interface.
+     *
+     * @param factories the list of factories to initialize the factory map with
+     */
+    public void charge(List<F> factories) {
+        for (F factory : factories) {
             Class<?>[] interfaces = factory.getClass().getInterfaces();
-            factoryMap.put(interfaces.length>0 ? interfaces[0].getSimpleName() : factory.getClass().getSimpleName(), factory);
+            for (Class<?> interfaceClass : interfaces) {
+                if (InboundActionFactory.class.isAssignableFrom(interfaceClass)) {
+                    factoryMap.put(interfaceClass.getSimpleName(), factory);
+                }
+            }
         }
         isInitialized = true;
     }
 
     /**
-     * Retrieves the singleton instance of the InboundActionProviderFactory class.
+     * Retrieves the singleton instance of {@link InboundActionProviderFactory}.
      *
-     * @return the singleton instance of the InboundActionProviderFactory class
+     * @param <F> the type of InboundActionFactory
+     * @param <A> the type of InboundAction or its subclass that the factories create
+     * @return the singleton instance of InboundActionProviderFactory
      */
-    public static InboundActionProviderFactory getInstance() {
-        return INSTANCE;
+    public static <F extends InboundActionFactory<A>, A extends InboundAction> InboundActionProviderFactory<F, A> getINSTANCE() {
+        @SuppressWarnings("unchecked")
+        InboundActionProviderFactory<F, A> factory = (InboundActionProviderFactory<F, A>) INSTANCE;
+        return factory;
     }
 
     /**
-     * Retrieves an instance of the desired InboundActionFactory implementation based on the provided factory class.
-     * @param factoryClass the class name of the desired factory
-     * @param <T> the type of the desired factory
-     * @return an instance of the desired factory
-     * @throws ProviderFactoryException if the factory is not initialized
+     * Retrieves the factory instance of the specified factory class.
+     *
+     * @param factoryClass the class of the factory to retrieve
+     * @return the factory instance of the specified factory class
+     * @throws ProviderFactoryException if the factory has not been initialized
      */
-    public <T extends InboundActionFactory<?>> T getFactory(String factoryClass) throws ProviderFactoryException {
+    public F getFactory(Class<F> factoryClass) throws ProviderFactoryException {
         if (!isInitialized) {
             throw new ProviderFactoryException("Factory not initialized");
         }
-        return (T) factoryMap.get(factoryClass);
+        return factoryMap.get(factoryClass.getSimpleName());
     }
 
     /**
      * Resets the provider factory by clearing the factory map and setting the initialized flag to false.
      */
     public void resetProviderFactory() {
-        factoryMap.clear();
-        isInitialized = false;
+        InboundActionProviderFactory<?, ?> inboundActionProviderFactory = InboundActionProviderFactory.getINSTANCE();
+        if (inboundActionProviderFactory.isInitialized()) {
+            factoryMap.clear();
+            isInitialized = false;
+        }
     }
 }
