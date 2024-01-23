@@ -1,13 +1,22 @@
 /*
- * Copyright (c) 2024.
+ * Copyright 2024 My Virtual Hub
  *
- *  This software is provided under the BSD-2-Clause license. By using this software,
- *  * you agree to respect the terms and conditions of the BSD-2-Clause license.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
 package br.com.myvirtualhub.omni.ports.inbound.sms.interfaces;
 
-import br.com.myvirtualhub.omni.ports.inbound.core.interfaces.InboudActionFactory;
+import br.com.myvirtualhub.omni.ports.inbound.core.interfaces.InboundActionFactory;
 
 /**
  * The SmsInboundActionFactory interface extends the InboundActionFactory interface and represents a factory for creating
@@ -16,7 +25,7 @@ import br.com.myvirtualhub.omni.ports.inbound.core.interfaces.InboudActionFactor
  *
  * @param <A> the type of action objects that this factory creates
  */
-public interface SmsInboundActionFactory<A> extends InboudActionFactory<A> {
+public interface SmsInboundActionFactory<A> extends InboundActionFactory<A> {
     /**
      * Creates an instance of SmsInboundAction.
      *

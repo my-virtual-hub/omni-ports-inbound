@@ -14,18 +14,21 @@
  * limitations under the License.
  */
 
-package br.com.myvirtualhub.omni.ports.inbound.sms.enums;
+package br.com.myvirtualhub.omni.ports.inbound.core.interfaces;
 
 /**
- * This enum represents the status of an SMS message.
+ * The InboundActionFactory interface represents a factory for creating objects of type T.
+ * Implementations of this interface must provide an implementation for the {@link #create()} method,
+ * which is responsible for creating and returning an instance of type T.
+ *
+ * @param <T> the type of objects that this factory creates
  */
-public enum SmsStatus {
+public interface InboundActionFactory<T> {
+
     /**
-     * Represents the status of an SMS message when it is queued in the Omni SMS system.
+     * Creates and returns an instance of type T.
+     *
+     * @return an instance of type T
      */
-    OMNI_QUEUED,
-    /**
-     * This enum value represents the status of an SMS message that has been successfully sent by the Omni SMS system.
-     */
-    OMNI_SENT
+    T create();
 }
