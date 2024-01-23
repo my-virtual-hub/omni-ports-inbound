@@ -21,7 +21,7 @@ import br.com.myvirtualhub.omni.ports.inbound.core.interfaces.InboundActionFacto
 
 /**
  * The SmsInboundActionFactory interface extends the InboundActionFactory interface and represents a factory for creating
- * action objects of type A. Implementations of this interface must provide an implementation for the {@link #create()} method,
+ * action objects of type A. Implementations of this interface must provide an implementation for the {@link #createAction()} method,
  * which is responsible for creating and returning an instance of type A.
  *
  * @param <A> the type of action objects that this factory creates
@@ -32,5 +32,5 @@ public interface SmsInboundActionFactory<A extends InboundAction> extends Inboun
      *
      * @return an instance of type A
      */
-    A create();
+    A createAction();
 }
