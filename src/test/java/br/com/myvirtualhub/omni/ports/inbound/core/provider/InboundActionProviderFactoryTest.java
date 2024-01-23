@@ -21,8 +21,6 @@ import br.com.myvirtualhub.omni.ports.inbound.core.interfaces.InboundAction;
 import br.com.myvirtualhub.omni.ports.inbound.core.interfaces.InboundActionFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import java.util.ArrayList;
-import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 class InboundActionProviderFactoryTest {
@@ -58,11 +56,7 @@ class InboundActionProviderFactoryTest {
 
     @Test
     void initialize_shouldInitializeFactoryMap() {
-        List<TestInboundActionFactory> factories = new ArrayList<>();
-        factories.add(new TestInboundActionFactoryImpl());
-
-        factory.charge(factories);
-
+        factory.charge(new TestInboundActionFactoryImpl());
         assertTrue(factory.isInitialized());
         assertEquals(1, factory.getFactoryMapSize());
     }
@@ -77,38 +71,25 @@ class InboundActionProviderFactoryTest {
 
     @Test
     void getFactory_shouldRetrieveFactoryInstance() throws ProviderFactoryException {
-        List<TestInboundActionFactory> factories = new ArrayList<>();
         TestInboundActionFactory testFactory = new TestInboundActionFactoryImpl();
-        factories.add(testFactory);
-
-        factory.charge(factories);
-
+        factory.charge(testFactory);
         TestInboundActionFactory retrievedFactory = factory.getFactory(TestInboundActionFactory.class);
-
         assertNotNull(retrievedFactory);
         assertSame(testFactory, retrievedFactory);
     }
 
     @Test
     void getFactory_shouldRetrieveFactoryInstanceWith2Factories() throws ProviderFactoryException {
-        List<TestInboundActionFactory> factories = new ArrayList<>();
-        List<Test2InboundActionFactory> factories2 = new ArrayList<>();
         TestInboundActionFactory testFactory = new TestInboundActionFactoryImpl();
         Test2InboundActionFactory test2Factory = new Test2InboundActionFactoryImpl();
-        factories.add(testFactory);
-        factories2.add(test2Factory);
-
-        factory.charge(factories);
-        factory2.charge(factories2);
-
+        factory.charge(testFactory);
+        factory2.charge(test2Factory);
         TestInboundActionFactory retrievedFactory = factory.getFactory(TestInboundActionFactory.class);
         Test2InboundActionFactory retrievedFactory2 = factory2.getFactory(Test2InboundActionFactory.class);
-
         assertNotNull(retrievedFactory);
         assertSame(testFactory, retrievedFactory);
         assertNotNull(retrievedFactory2);
         assertSame(test2Factory, retrievedFactory2);
-
         retrievedFactory = factory.getFactory(TestInboundActionFactory.class);
         assertNotNull(retrievedFactory);
         assertSame(testFactory, retrievedFactory);
@@ -121,16 +102,10 @@ class InboundActionProviderFactoryTest {
 
     @Test
     void resetProviderFactory_shouldResetFactory() {
-        List<TestInboundActionFactory> factories = new ArrayList<>();
-        factories.add(new TestInboundActionFactoryImpl());
-
-        factory.charge(factories);
-
+        factory.charge(new TestInboundActionFactoryImpl());
         assertTrue(factory.isInitialized());
         assertEquals(1, factory.getFactoryMapSize());
-
         factory.resetProviderFactory();
-
         assertFalse(factory.isInitialized());
         assertEquals(0, factory.getFactoryMapSize());
     }
