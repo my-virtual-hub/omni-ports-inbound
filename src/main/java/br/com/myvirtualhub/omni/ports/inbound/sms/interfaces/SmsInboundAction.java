@@ -16,6 +16,7 @@
 
 package br.com.myvirtualhub.omni.ports.inbound.sms.interfaces;
 
+import br.com.myvirtualhub.omni.ports.inbound.core.interfaces.InboundAction;
 import br.com.myvirtualhub.omni.ports.inbound.sms.dto.SmsPayloadDTO;
 import br.com.myvirtualhub.omni.ports.inbound.sms.dto.SmsResultDTO;
 
@@ -23,7 +24,7 @@ import br.com.myvirtualhub.omni.ports.inbound.sms.dto.SmsResultDTO;
  * The SmsInboundAction interface represents an action to send an inbound SMS message.
  * It defines a single method sendSms() that accepts an SmsPayloadDTO and returns a SmsResultDTO.
  */
-public interface SmsInboundAction {
+public interface SmsInboundAction extends InboundAction {
 
     /**
      * Sends an SMS message using the provided payload.

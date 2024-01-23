@@ -16,6 +16,7 @@
 
 package br.com.myvirtualhub.omni.ports.inbound.sms.interfaces;
 
+import br.com.myvirtualhub.omni.ports.inbound.core.interfaces.InboundAction;
 import br.com.myvirtualhub.omni.ports.inbound.core.interfaces.InboundActionFactory;
 
 /**
@@ -25,12 +26,11 @@ import br.com.myvirtualhub.omni.ports.inbound.core.interfaces.InboundActionFacto
  *
  * @param <A> the type of action objects that this factory creates
  */
-public interface SmsInboundActionFactory<A> extends InboundActionFactory<A> {
+public interface SmsInboundActionFactory<A extends InboundAction> extends InboundActionFactory<A> {
     /**
      * Creates an instance of SmsInboundAction.
      *
      * @return an instance of type A
      */
-    @Override
     A create();
 }

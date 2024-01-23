@@ -17,16 +17,8 @@
 package br.com.myvirtualhub.omni.ports.inbound.core.interfaces;
 
 /**
- * The InboundActionFactory interface defines a contract for classes that create instances of InboundAction or its subclasses.
- *
- * @param <A> the type of InboundAction or its subclass that this factory creates
+ * The InboundAction interface is used to define the contract for classes that represent inbound actions.
+ * Classes implementing this interface should provide the necessary logic to handle a specific inbound action.
  */
-public interface InboundActionFactory<A extends InboundAction> {
-
-    /**
-     * Creates an instance of an InboundAction or its subclass.
-     *
-     * @return an instance of an InboundAction or its subclass
-     */
-    A createAction();
+public interface InboundAction {
 }
