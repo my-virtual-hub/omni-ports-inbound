@@ -21,7 +21,6 @@ import br.com.myvirtualhub.omni.ports.inbound.core.interfaces.InboundAction;
 import br.com.myvirtualhub.omni.ports.inbound.core.interfaces.InboundActionFactory;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -62,18 +61,15 @@ public class InboundActionProviderFactory<F extends InboundActionFactory<A>, A e
     }
 
     /**
-     * Initializes the factory map with instances of {@link InboundActionFactory} based on a list of factories.
-     * The factories must implement the {@link InboundActionFactory} interface.
+     * Adds the given factory to the factory map if it implements the InboundActionFactory interface.
      *
-     * @param factories the list of factories to initialize the factory map with
+     * @param factory the factory to be charged
      */
-    public void charge(List<F> factories) {
-        for (F factory : factories) {
-            Class<?>[] interfaces = factory.getClass().getInterfaces();
-            for (Class<?> interfaceClass : interfaces) {
-                if (InboundActionFactory.class.isAssignableFrom(interfaceClass)) {
-                    factoryMap.put(interfaceClass.getSimpleName(), factory);
-                }
+    public void charge(F factory) {
+        Class<?>[] interfaces = factory.getClass().getInterfaces();
+        for (Class<?> interfaceClass : interfaces) {
+            if (InboundActionFactory.class.isAssignableFrom(interfaceClass)) {
+                factoryMap.put(interfaceClass.getSimpleName(), factory);
             }
         }
         isInitialized = true;
