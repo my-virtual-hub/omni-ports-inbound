@@ -99,7 +99,21 @@ public class InboundActionProviderFactory<F extends InboundActionFactory<A>, A e
         if (!isInitialized) {
             throw new ProviderFactoryException("Factory not initialized");
         }
-        return factoryMap.get(factoryClass.getSimpleName());
+        return getFactory(factoryClass.getSimpleName());
+    }
+
+    /**
+     * Retrieves the factory instance of the specified factory class.
+     *
+     * @param factoryClassSimpleName the simple name of the factory class to retrieve
+     * @return the factory instance of the specified factory class
+     * @throws ProviderFactoryException if the factory has not been initialized
+     */
+    public F getFactory(String factoryClassSimpleName) throws ProviderFactoryException {
+        if (!isInitialized) {
+            throw new ProviderFactoryException("Factory not initialized");
+        }
+        return factoryMap.get(factoryClassSimpleName);
     }
 
     /**

@@ -93,6 +93,12 @@ class InboundActionProviderFactoryTest {
         retrievedFactory = factory.getFactory(TestInboundActionFactory.class);
         assertNotNull(retrievedFactory);
         assertSame(testFactory, retrievedFactory);
+        retrievedFactory = factory.getFactory(TestInboundActionFactory.class.getSimpleName());
+        retrievedFactory2 = factory2.getFactory(Test2InboundActionFactory.class.getSimpleName());
+        assertNotNull(retrievedFactory);
+        assertSame(testFactory, retrievedFactory);
+        assertNotNull(retrievedFactory2);
+        assertSame(test2Factory, retrievedFactory2);
     }
 
     @Test
