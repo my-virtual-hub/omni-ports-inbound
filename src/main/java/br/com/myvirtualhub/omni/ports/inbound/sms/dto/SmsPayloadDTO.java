@@ -16,6 +16,8 @@
 
 package br.com.myvirtualhub.omni.ports.inbound.sms.dto;
 
+import br.com.myvirtualhub.omni.commons.core.OmniPhoneNumber;
+
 import java.util.Objects;
 
 /**
@@ -26,14 +28,25 @@ import java.util.Objects;
  */
 public class SmsPayloadDTO {
 
+    private final OmniPhoneNumber fromOmniPhoneNumber;
     private final SmsRecipientDTO recipient;
     private final SmsMessageDTO message;
     private final String clientMessageId;
 
-    private SmsPayloadDTO(SmsRecipientDTO recipient, SmsMessageDTO message, String clientMessageId) {
+    private SmsPayloadDTO(OmniPhoneNumber fromOmniPhoneNumber, SmsRecipientDTO recipient, SmsMessageDTO message, String clientMessageId) {
+        this.fromOmniPhoneNumber = fromOmniPhoneNumber;
         this.recipient = recipient;
         this.message = message;
         this.clientMessageId = clientMessageId;
+    }
+
+    /**
+     * Retrieves the phone number of the SmsPayloadDTO.
+     *
+     * @return the phone number of the SmsPayloadDTO
+     */
+    public OmniPhoneNumber getFromOmniPhoneNumber() {
+        return fromOmniPhoneNumber;
     }
 
     /**
@@ -67,7 +80,8 @@ public class SmsPayloadDTO {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof SmsPayloadDTO smsPayloadDTO)) return false;
-        return Objects.equals(getRecipient(), smsPayloadDTO.getRecipient()) &&
+        return Objects.equals(getFromOmniPhoneNumber(), smsPayloadDTO.getFromOmniPhoneNumber()) &&
+                Objects.equals(getRecipient(), smsPayloadDTO.getRecipient()) &&
                 Objects.equals(getMessage(), smsPayloadDTO.getMessage()) &&
                 Objects.equals(getClientMessageId(), smsPayloadDTO.getClientMessageId());
     }
@@ -75,6 +89,7 @@ public class SmsPayloadDTO {
     @Override
     public int hashCode() {
         int result = getRecipient() != null ? getRecipient().hashCode() : 0;
+        result = 31 * result + (getFromOmniPhoneNumber() != null ? getFromOmniPhoneNumber().hashCode() : 0);
         result = 31 * result + (getMessage() != null ? getMessage().hashCode() : 0);
         result = 31 * result + (getClientMessageId() != null ? getClientMessageId().hashCode() : 0);
         return result;
@@ -83,6 +98,7 @@ public class SmsPayloadDTO {
     @Override
     public String toString() {
         return "SmsPayloadDTO{" +
+                "fromOmniPhoneNumber=" + fromOmniPhoneNumber +
                 "recipient=" + recipient +
                 ", message=" + message +
                 ", clientMessageId='" + clientMessageId + '\'' +
@@ -102,6 +118,7 @@ public class SmsPayloadDTO {
      * The Builder class provides methods for creating instances of SmsPayloadDTO.
      */
     public static class Builder {
+        private OmniPhoneNumber fromOmniPhoneNumber;
         private SmsRecipientDTO recipient;
         private SmsMessageDTO message;
         private String clientMessageId;
@@ -111,6 +128,17 @@ public class SmsPayloadDTO {
          */
         public Builder() {
             // empty constructor. Using builder pattern.
+        }
+
+        /**
+         * Sets the "from" phone number for the SmsPayloadDTO.
+         *
+         * @param fromOmniPhoneNumber The "from" phone number as an instance of the OmniPhoneNumber class.
+         * @return The updated Builder instance.
+         */
+        public Builder withFromOmniPhoneNumber(OmniPhoneNumber fromOmniPhoneNumber) {
+            this.fromOmniPhoneNumber = fromOmniPhoneNumber;
+            return this;
         }
 
         /**
@@ -152,7 +180,7 @@ public class SmsPayloadDTO {
          * @return A new instance of the SmsPayloadDTO class.
          */
         public SmsPayloadDTO build() {
-            return new SmsPayloadDTO(recipient, message, clientMessageId);
+            return new SmsPayloadDTO(fromOmniPhoneNumber, recipient, message, clientMessageId);
         }
     }
 }

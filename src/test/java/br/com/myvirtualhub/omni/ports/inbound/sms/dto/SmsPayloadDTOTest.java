@@ -24,6 +24,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class SmsPayloadDTOTest {
 
+    OmniPhoneNumber fromOmniPhoneNumber;
     SmsRecipientDTO recipient;
     SmsMessageDTO message;
     String clientMessageId;
@@ -32,11 +33,13 @@ class SmsPayloadDTOTest {
 
     @BeforeEach
     void setUp() throws PhoneNumberException {
+        fromOmniPhoneNumber = new OmniPhoneNumber("+1987654320");
         recipient = SmsRecipientDTO.builder()
                 .withPhoneNumber(new OmniPhoneNumber("+1234567890")).build();
         message = SmsMessageDTO.builder().withContent("Test message").withEncodingType("UTF-8").build();
         clientMessageId = "12345";
         payload = SmsPayloadDTO.builder()
+                .withFromOmniPhoneNumber(fromOmniPhoneNumber)
                 .withRecipient(recipient)
                 .withMessage(message)
                 .withClientMessageId(clientMessageId)
@@ -45,7 +48,7 @@ class SmsPayloadDTOTest {
 
     @Test
     void testBuilderAndAccessors() {
-
+        assertEquals(fromOmniPhoneNumber, payload.getFromOmniPhoneNumber());
         assertEquals(recipient, payload.getRecipient());
         assertEquals(message, payload.getMessage());
         assertEquals(clientMessageId, payload.getClientMessageId());
@@ -54,6 +57,7 @@ class SmsPayloadDTOTest {
     @Test
     void testEquals() {
         SmsPayloadDTO payload2 = SmsPayloadDTO.builder()
+                .withFromOmniPhoneNumber(fromOmniPhoneNumber)
                 .withRecipient(recipient)
                 .withMessage(message)
                 .withClientMessageId(clientMessageId)
@@ -65,6 +69,7 @@ class SmsPayloadDTOTest {
     @Test
     void testHashCode() {
         SmsPayloadDTO payload2 = SmsPayloadDTO.builder()
+                .withFromOmniPhoneNumber(fromOmniPhoneNumber)
                 .withRecipient(recipient)
                 .withMessage(message)
                 .withClientMessageId(clientMessageId)
@@ -75,7 +80,9 @@ class SmsPayloadDTOTest {
 
     @Test
     void testToString() {
-        String expectedString = "SmsPayloadDTO{recipient=" + recipient +
+        String expectedString = "SmsPayloadDTO{" +
+                "fromOmniPhoneNumber=" + fromOmniPhoneNumber +
+                "recipient=" + recipient +
                 ", message=" + message +
                 ", clientMessageId='" + clientMessageId + '\'' +
                 '}';
